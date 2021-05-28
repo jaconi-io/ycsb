@@ -1,4 +1,5 @@
 *
+!download-hadoop.sh
 !generate.sh
 !log4j.properties
 !slf4j-log4j12-1.7.30.jar
