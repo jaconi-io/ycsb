@@ -45,6 +45,12 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+# Setup non-root user.
+RUN addgroup --system --gid 10001 ycsb \
+ && adduser --system --uid 10001 --ingroup ycsb ycsb \
+ && chown -R ycsb:ycsb /opt/ycsb
+USER ycsb
+
 ENTRYPOINT [ "dockerize", \
   "-template", "/opt/ycsb/hbase20-binding/conf/hbase-site.xml.tmpl:/opt/ycsb/hbase20-binding/conf/hbase-site.xml", \
   "-template", "/opt/ycsb/hbase20-binding/conf/core-site.xml.tmpl:/opt/ycsb/hbase20-binding/conf/core-site.xml", \
